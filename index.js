@@ -21,7 +21,7 @@ const scraper = async() => {
   const $ = cheerio.load(response.data);
   for (key in docElements){
     if (docElements.hasOwnProperty(key)){
-      resultJson[key] = $(docElements[key]).text()
+      resultJson[key] = $(docElements[key]).text().replace(/\n+| +/g,' ');
     }
   }
   console.log(resultJson)
