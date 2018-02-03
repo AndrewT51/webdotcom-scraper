@@ -13,8 +13,7 @@
     "axios": "^0.17.1",
     "chalk": "^2.3.0",
     "cheerio": "^1.0.0-rc.2",
-    "js-yaml": "^3.10.0",
-    "url-exists": "^1.0.3"
+    "js-yaml": "^3.10.0"
   },
   "devDependencies": {
     "eslint": "^4.17.0"

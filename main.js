@@ -1,5 +1,5 @@
 const [structureFile, uri] = process.argv.slice(2);
-
+const [SUCCESS, FAIL] = ['SUCCESS', 'FAIL'];
 const Scraper = require('./scraper');
 const fullPath = Scraper.createFullPathToStructureFile(structureFile);
 const pathExists = Scraper.pathIsValid(fullPath);
@@ -13,7 +13,7 @@ const init = async () => {
     
     const scrapeResult = await scraper.scrape();
 
-    process.stdout.write(JSON.stringify(scrapeResult));
+    process.stdout.write(Scraper.formatOutput(SUCCESS,scrapeResult));
 
   } catch (e) {
     

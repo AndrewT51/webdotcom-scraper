@@ -20,6 +20,18 @@ class Scraper {
 
   }
 
+  // Use these constant colors for error or success logging
+  static get colors () {
+
+    return {
+      SUCCESS: 'green',
+      FAIL: 'red'
+    };
+
+  }
+
+  // Create the full path to the structure file and append .yml if
+  // no .yml or .yaml extension already given
   static createFullPathToStructureFile (structureFile = '') {
 
     const re = new RegExp(/^ya?ml$/, 'i');
@@ -32,12 +44,22 @@ class Scraper {
 
   }
 
+  // Check that the path to the file and the file itself exist
   static pathIsValid (filePath) {
 
     return fs.existsSync(filePath);
     
   }
+  
+  // Format the text to the console nicely as a string with spacing and colour
+  static formatOutput (status, obj) {
 
+    return chalk[this.colors[status]](JSON.stringify(obj, null, '\t'));
+
+  }
+
+  // Create a JSON representation of the information required from the 
+  // webpage, according to the structure file given
   createJSONResponse (acc, [key, value]) {
 
     acc[key] = this.$(value).text().replace(/\n+| +/g, ' ');
