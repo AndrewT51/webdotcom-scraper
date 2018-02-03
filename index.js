@@ -8,7 +8,7 @@ const cheerio = require('cheerio');
 const colors = {
   SUCCESS: 'green',
   ERROR: 'red'
-}
+};
 
 let docElements;
 let resultJson = {};
@@ -27,7 +27,7 @@ try {
 
 const scraper = async() => {
 
-  const response = await axios.get(`http://${ur}`);
+  const response = await axios.get(`http://${uri}`);
   const $ = cheerio.load(response.data);
   for (key in docElements){
     if (docElements.hasOwnProperty(key)){
