@@ -4,20 +4,16 @@ const fs = require('fs');
 const path = require('path');
 const axios = require('axios');
 const cheerio = require('cheerio');
-const urlExists = require('url-exists');
+const validateYAML = require('yaml-lint');
 
 class Scraper {
   
-  constructor(structureFile, uri) {
+  constructor(structureBlueprint, uri) {
 
-    let structureBlueprint = fs.readFileSync(structureFile);
-    
     this.scrapeBlueprint = yaml.safeLoad(structureBlueprint);
-
     this.uri = uri;
-
     this.createJSONResponse = this.createJSONResponse.bind(this);
-
+      
   }
 
   // Use these constant colors for error or success logging
@@ -50,11 +46,40 @@ class Scraper {
     return fs.existsSync(filePath);
     
   }
+
+  // Check that the YAML file is valid
+  static yamlIsValid (fileContent) {
+
+    return validateYAML.lint(fileContent)
+    .then(() => true )
+    .catch( () => false );
+
+  }
+
+  // Convert node's fs.readfile so that it returns a promise
+  static readFile (fullpath) {
+
+    return new Promise((resolve, reject) => {
+
+      fs.readFile(fullpath, (err, data) => {
+
+        if (err) reject('Error');
+        resolve(data.toString('utf8'));
+
+      });
+
+    });
+
+  }
   
   // Format the text to the console nicely as a string with spacing and colour
   static formatOutput (status, obj) {
 
-    return chalk[this.colors[status]](JSON.stringify(obj, null, '\t'));
+    if (typeof obj !== 'string') {
+      obj = JSON.stringify(obj, null, '\t');
+    };
+
+    return chalk[this.colors[status]](obj);
 
   }
 
@@ -77,7 +102,7 @@ class Scraper {
       
     } catch (e) {
       
-      throw new Error('Invalid shit')
+      throw new Error('Failed to get page')
 
     }
 
