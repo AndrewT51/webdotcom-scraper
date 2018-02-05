@@ -134,12 +134,23 @@ class Scraper {
   createJSONResponse (acc, [key, value]) {
     
     const $ = this.$;
+    const uri = this.uri;
     const elements = this.$(value);
     acc[key] = [];
-
+    
     elements.each(function() {
 
-      acc[key] = [...acc[key], $(this).text()];
+      let link = $(this).attr('href');
+      let text = $(this).text();
+      
+      if (link) {
+
+        acc[`${key}_links`] = acc[`${key}_links`] || [];
+        acc[`${key}_links`] = [...acc[`${key}_links`], `${uri}${link}`];
+
+      }
+
+      acc[key] = [...acc[key], text];
 
     });
 
