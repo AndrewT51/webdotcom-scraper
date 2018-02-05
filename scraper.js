@@ -6,6 +6,7 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const validateYAML = require('yaml-lint');
 const urlExists = require('url-exists');
+const isOnline = require('is-online');
 
 class Scraper {
   
@@ -79,9 +80,7 @@ class Scraper {
   }
 
   static urlExists (url) {
-    console.log(url);
     
-
     return new Promise((resolve, reject) => {
       
       urlExists(url, (err, exists) => {
@@ -93,6 +92,11 @@ class Scraper {
 
     });
 
+  }
+
+  static get isOnline () {
+
+    return isOnline();
 
   }
 
@@ -151,7 +155,7 @@ class Scraper {
       
     } catch (e) {
       
-      throw new Error('Failed to get page')
+      throw new Error('Failed to get page');
 
     }
 

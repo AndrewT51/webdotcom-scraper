@@ -14,6 +14,12 @@ const init = async () => {
 
   }
 
+  if (!await Scraper.isOnline) {
+  
+    throw new Error('There is no internet connection');
+
+  }
+
   // Check that the url exists
   const urlExists = await Scraper.urlExists(fullUrl);  
   

@@ -15,6 +15,8 @@ This is a promise based HTTP client that works from the browser or the server.
 This package makes is easy to add a bit of colour to the output in the console.  
 ###### url-exists  
 This package will send a head request to the page to efficiently discover if it exists.
+###### is-online  
+Checks if there is an internet connection.
 ### To use
 Once pulled from the git repository, enter the project directory and run yarn install.  
 Then in the command line, type:  
