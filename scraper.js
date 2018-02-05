@@ -134,7 +134,7 @@ class Scraper {
 
     elements.each(function() {
 
-      acc[key] = `${acc[key] || ''}${$(this).text()} `;
+      acc[key] = `${acc[key] || ''}[ ${$(this).text()} ] `;
 
     });
 
