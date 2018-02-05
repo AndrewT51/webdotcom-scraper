@@ -1,5 +1,10 @@
 # This is designed for the uri - www.scoot.co.uk
 title: 'title'
-popular_searches: '#collapsePopular_Searches ul li'
 welcome_text: '.em-welcome-message'
+popular_searches: '#collapsePopular_Searches ul li a'
 food_and_drink: '#collapseFood_and_Drink ul li a'
+health_and_beauty: '#collapseHealth_and_Beauty ul li a'
+shopping: '#collapseShopping ul li a'
+motoring: '#collapseMotoring ul li a'
+building_contractors: '#collapseBuilding_Contractors ul li a'
+property_maintenance: '#collapseProperty_Maintenance ul li a'
