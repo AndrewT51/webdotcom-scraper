@@ -12,7 +12,9 @@ This is a lean implementation of core jQuery, designed for the server. It is use
 ###### axios  
 This is a promise based HTTP client that works from the browser or the server.  
 ###### chalk  
-This package makes is easy to add a bit of colour to the output in the console.
+This package makes is easy to add a bit of colour to the output in the console.  
+###### url-exists  
+This package will send a head request to the page to efficiently discover if it exists.
 ### To use
 Once pulled from the git repository, enter the project directory and run yarn install.  
 Then in the command line, type:  

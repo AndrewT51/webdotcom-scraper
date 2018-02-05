@@ -5,6 +5,7 @@ const path = require('path');
 const axios = require('axios');
 const cheerio = require('cheerio');
 const validateYAML = require('yaml-lint');
+const urlExists = require('url-exists');
 
 class Scraper {
   
@@ -40,6 +41,27 @@ class Scraper {
 
   }
 
+  static createFullUrl (uri) {
+
+    const re = new RegExp(/^https?/, 'i');
+    const addDotCom = uri.split('.').length <= 2;
+
+    if (addDotCom) {
+
+      uri = `${uri}.com`;
+
+    }
+
+    if (!re.test(uri)) {
+
+      uri = `http://${uri}`;
+
+    }
+
+    return uri;
+
+  }
+
   // Check that the path to the file and the file itself exist
   static pathIsValid (filePath) {
 
@@ -53,6 +75,24 @@ class Scraper {
     return validateYAML.lint(fileContent)
     .then(() => true )
     .catch( () => false );
+
+  }
+
+  static urlExists (url) {
+    console.log(url);
+    
+
+    return new Promise((resolve, reject) => {
+      
+      urlExists(url, (err, exists) => {
+        
+        if (err) reject('Error');
+        resolve(exists);
+    
+      });
+
+    });
+
 
   }
 
@@ -98,7 +138,7 @@ class Scraper {
     let page;
     try {
             
-      page = await axios.get(`http://${this.uri}`);
+      page = await axios.get(this.uri);
       
     } catch (e) {
       
