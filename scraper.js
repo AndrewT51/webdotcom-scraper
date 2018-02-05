@@ -135,10 +135,11 @@ class Scraper {
     
     const $ = this.$;
     const elements = this.$(value);
+    acc[key] = [];
 
     elements.each(function() {
 
-      acc[key] = `${acc[key] || ''}[ ${$(this).text()} ] `;
+      acc[key] = [...acc[key], $(this).text()];
 
     });
 
