@@ -2,4 +2,4 @@
 title: 'title'
 popular_searches: '#collapsePopular_Searches ul li'
 welcome_text: '.em-welcome-message'
-food_and_drink: '#collapseFood_and_Drink ul li'
+food_and_drink: '#collapseFood_and_Drink ul li a'

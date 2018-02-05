@@ -116,8 +116,10 @@ class Scraper {
   static formatOutput (status, obj) {
 
     if (typeof obj !== 'string') {
+
       obj = JSON.stringify(obj, null, '\t');
-    };
+
+    }
 
     return chalk[this.colors[status]](obj);
 
@@ -126,8 +128,15 @@ class Scraper {
   // Create a JSON representation of the information required from the 
   // webpage, according to the structure file given
   createJSONResponse (acc, [key, value]) {
+    
+    const $ = this.$;
+    const elements = this.$(value);
 
-    acc[key] = this.$(value).text().replace(/\n+| +/g, ' ');
+    elements.each(function() {
+
+      acc[key] = `${acc[key] || ''}${$(this).text()} `;
+
+    });
 
     return acc;
 
